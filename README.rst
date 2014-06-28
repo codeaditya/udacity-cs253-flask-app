@@ -21,42 +21,42 @@ dependency. To install all the dependencies run:
 
 Structure
 ---------
-The root of the folder contains the package (folder) called `cs253` which
+The root of the folder contains the package (folder) called ``cs253`` which
 is our main application. To run the application, there is a file called
-`runserver.py`. Executing the following command would start our application:
+``runserver.py``. Executing the following command would start our application:
 
     python runserver.py
 
-The package `cs253` contains the following folders:
+The package ``cs253`` contains the following folders:
 
-- `cs253/apps`: package for all the mini-apps (Blueprints) we develop during
+- ``cs253/apps``: package for all the mini-apps (Blueprints) we develop during
   course
-- `cs253/lib`: package which contains the utils for cookie and password hashing
-- `cs253/schema`: Database schema definition files for sqlite3
-- `cs253/static`: All the css, fonts, javascript files go here (I am using
+- ``cs253/lib``: package which contains the utils for cookie and password hashing
+- ``cs253/schema``: Database schema definition files for sqlite3
+- ``cs253/static``: All the css, fonts, javascript files go here (I am using
   Bootstrap)
-- `cs253/templates`: Templates for all our mini-apps we develop go here
+- ``cs253/templates``: Templates for all our mini-apps we develop go here
 
 And the following files:
 
-- `cs253/__init__.py`: This is our main file which instantiates our Flask app
-  and Cache (`SimpleCache` from Werkzeug library) and imports all the
-  Blueprints (mini-apps) from `cs253/apps`
-- `cs253/config.py`: This is imported inside `cs253/__init__.py`
-- `cs253/cs253_tests.py`: This is for unittests for our application
+- ``cs253/__init__.py``: This is our main file which instantiates our Flask app
+  and Cache (``SimpleCache`` from Werkzeug library) and imports all the
+  Blueprints (mini-apps) from ``cs253/apps``
+- ``cs253/config.py``: This is imported inside ``cs253/__init__.py``
+- ``cs253/cs253_tests.py``: This is for unittests for our application
 
 
 Configuration
 -------------
-We would need to create a config file at `cs253/config.py`. The application
+We would need to create a config file at ``cs253/config.py``. The application
 would import all the configuration from that file. I have got the following
 config defined:
 
-- `DATABASE` = `str` ("/path/to/sqlite3/database/file")
-- `DEBUG` = `bool` (True for local, False for server)
-- `PYTHONANYWHERE` = `bool` (False for local, True for server)
-- `SECRET_KEY` = `str` ("random_string")
-- `IPINFODB_API_KEY1` = `str` ("for getting geo co-ordinates using IP address)
+- ``DATABASE`` = ``str`` ("/path/to/sqlite3/database/file")
+- ``DEBUG`` = ``bool`` (True for local, False for server)
+- ``PYTHONANYWHERE`` = ``bool`` (False for local, True for server)
+- ``SECRET_KEY`` = ``str`` ("random_string")
+- ``IPINFODB_API_KEY1`` = ``str`` ("for getting geo co-ordinates using IP address)
 
 
 Unittests
@@ -64,11 +64,11 @@ Unittests
 Right now, the tests doesn't cover the whole of the application. Only the
 following are covered:
 
-- `cs253/apps/birthday.py`
-- `cs253/apps/rot13.py`
-- `cs253/lib/utils.py`
+- ``cs253/apps/birthday.py``
+- ``cs253/apps/rot13.py``
+- ``cs253/lib/utils.py``
 
 We can run the unittests executing the following command from the root of the
-folder (`udacity-cs253-flask-app`):
+folder (``udacity-cs253-flask-app``):
 
     python -m cs253/cs253_tests
