@@ -1,0 +1,22 @@
+{% extends "blog_base.html" %}
+
+{% block title %}
+    CS253 Blog
+{% endblock title %}
+
+{% block body %}
+    <div class="blog-header">
+        <h1 class="blog-title text-center"><a href="/cs253/blog">CS253 Blog</a></h1>
+    </div>
+    {% for post in post_list %}
+        <div class="blog-post">
+            <div class="blog-post-title">
+                <a href="/cs253/blog/{{ post.id }}">{{ post.subject }}</a>
+            </div>
+            <div class="blog-post-meta">Posted on: {{ post.created }}</div>
+            <div>
+                {{ post.content }}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock body %}

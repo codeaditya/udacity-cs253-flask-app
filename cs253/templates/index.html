@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Codeadi's Index Page
+{% endblock title %}
+
+{% block body %}
+    <h1 class="page-header">Udacity CS253 - Web Development</h1>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <h4 class="list-group-item-text">
+                <a href='/cs253/birthday-form'>Birthday Form</a>
+            </h4>
+        </li>
+        <li class="list-group-item">
+            <h4 class="list-group-item-text">
+                <a href='/cs253/rot13'>Rot 13 Converter</a>
+            </h4>
+        </li>
+        <li class="list-group-item">
+            <h4 class="list-group-item-text">
+                <a href='/cs253/ascii-chan'>/ascii/ chan</a>
+            </h4>
+        </li>
+        <li class="list-group-item">
+            <h4 class="list-group-item-text">
+                <a href='/cs253/blog'>CS253 Blog</a>
+                <br>
+                <a href='/cs253/blog/newpost'>Add a new blog post</a>
+            </h4>
+        </li>
+        <li class="list-group-item">
+            <h4 class="list-group-item-text">
+                <a href='/cs253/blog/.json'>Blog Frontpage: JSON</a>
+                <br>
+                <a href='/cs253/blog/1.json'>Blog Post Permalink: JSON</a>
+            </h4>
+        </li>
+        <li class="list-group-item">
+            <h4 class="list-group-item-text">
+                <a href='/cs253/blog/signup'>User Signup</a>
+                <br>
+                <a href='/cs253/blog/login'>User Login</a>
+                <br>
+                <a href='/cs253/blog/welcome'>User Welcome</a>
+                <br>
+                <a href='/cs253/blog/logout'>User Logout</a>
+            </h4>
+        </li>
+    </ul>
+{% endblock body %}
+
+{% block footer %}
+    <p>You have visited this site {{ visits }} times!</p>
+{% endblock footer %}

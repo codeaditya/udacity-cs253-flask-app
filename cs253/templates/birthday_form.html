@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Birthday Form
+{% endblock title %}
+
+{% block body %}
+    <h2>What's your birthday?</h2>
+    <form class="well form-inline" method="post">
+        <div class="form-group">
+            <label class="sr-only" for="day">Day</label>
+            <input type="text" class="form-control" name="day"
+                   placeholder="Day" value="{{ day }}">
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="month">Month</label>
+            <input type="text" class="form-control" name="month"
+                   placeholder="Month" value="{{ month }}">
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="year">Year</label>
+            <input type="text" class="form-control" name="year"
+                   placeholder="Year" value="{{ year }}">
+        </div>
+        <div class="form-group has-error">
+            <span class="help-block">{{ error }}</span>
+        </div>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock body %}

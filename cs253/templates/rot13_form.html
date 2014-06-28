@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Unit2 Rot13
+{% endblock title %}
+
+{% block body %}
+    <h2 class="text-center">ROT13 Converter</h2>
+    <form class="well" method="post">
+        <div class="form-group">
+            <label class="sr-only" for="text">Enter some text to ROT13</label>
+            <textarea class="form-control" style="height: 200px; width: 100%;"
+                      name="text" placeholder="Enter some text to ROT13">{{ text }}</textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">ROT13 it!</button>
+        </div>
+    </form>
+{% endblock body %}
