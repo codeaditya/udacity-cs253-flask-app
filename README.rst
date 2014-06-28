@@ -19,6 +19,18 @@ dependency. To install all the dependencies run:
     pip install -r requirements.txt
 
 
+First-run
+---------
+If you are executing the application for the first time, you would need to
+first create the database for the application (otherwise, the apps requiring
+database connection would raise an error). Follow the Configuration_ section
+to first create the ``cs253/config.py`` file. Then, go to the root of the
+folder and start the python shell to execute the following in it:
+
+    >>> from cs253 import init_db
+    >>> init_db()
+
+
 Structure
 ---------
 The root of the folder contains the package (folder) called ``cs253`` which
