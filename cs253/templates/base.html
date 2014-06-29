@@ -33,15 +33,13 @@
     </div>
 
     <footer class="blog-footer">
-        <div class="container">
-            {% block footer %}
-                <a href="/">Return back to Index</a>
-                <br>
-                {% if query_age %}
-                    Queried {{ query_age }} seconds ago
-                {% endif %}
-            {% endblock footer %}
-        </div>
+        {% block footer %}
+            <a href="/">Return back to Index</a>
+            <br>
+            {% if query_age %}
+                Queried {{ query_age }} seconds ago
+            {% endif %}
+        {% endblock footer %}
     </footer>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
