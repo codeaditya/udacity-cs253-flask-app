@@ -10,10 +10,11 @@
         <div class="form-group">
             <label class="sr-only" for="text">Enter some text to ROT13</label>
             <textarea class="form-control" style="height: 200px; width: 100%;"
-                      name="text" placeholder="Enter some text to ROT13">{{ text }}</textarea>
+                      name="text" placeholder="Enter some text to ROT13"
+                      required autofocus>{{ text }}</textarea>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">ROT13 it!</button>
+            <button type="submit" class="btn btn-lg btn-primary">ROT13 it!</button>
         </div>
     </form>
 {% endblock body %}

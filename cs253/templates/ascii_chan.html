@@ -12,19 +12,21 @@
                 <div class="form-group">
                     <label class="control-label" for="title">title</label>
                     <input type="text" class="form-control" name="title"
-                           placeholder="Title for the /ascii/ art" value="{{ title }}">
+                           placeholder="Title for the /ascii/ art"
+                           value="{{ title }}" required>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="art">/ascii/ art</label>
                     <textarea class="form-control" name="art"
                               style="height: 200px; width: 100%; font-family: monospace;"
-                              placeholder="Paste/create your /ascii/ art here">{{ art }}</textarea>
+                              placeholder="Paste/create your /ascii/ art here"
+                              required>{{ art }}</textarea>
                 </div>
                 <div class="has-error">
                     <span class="help-block">{{ errormsg }}</span>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Submit Art</button>
+                    <button type="submit" class="btn btn-lg btn-primary btn-block">Submit Art</button>
                 </div>
             </form>
         </div>
