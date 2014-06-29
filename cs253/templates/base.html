@@ -25,10 +25,12 @@
 
     {% block head %}{% endblock head %}
 </head>
-<body class="container">
-    {% block body %}
-        <h1>{{ body_text }}</h1>
-    {% endblock body %}
+<body>
+    <div class="container">
+        {% block body %}
+            <h1>{{ body_text }}</h1>
+        {% endblock body %}
+    </div>
 
     <footer class="blog-footer">
         <div class="container">
