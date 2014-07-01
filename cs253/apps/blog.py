@@ -26,8 +26,20 @@ def query_blog_frontpage(update=False):
     return posts_with_age(posts)
 
 
+def query_blog_page(page_no, update=False):
+    cache_key = "page_" + str(page_no)
+    last_id = int(last_post_id())
+    entry_per_page = 10
+    last_post = last_id - (page_no - 1) * entry_per_page
+    first_post = last_post - entry_per_page + 1
+    db_query = "SELECT * FROM blog WHERE id <= ? AND id >= ? ORDER BY id DESC"
+    db_query_parameters = [last_post, first_post]
+    posts = cached_blog_query(cache_key, db_query, db_query_parameters, update)
+    return posts_with_age(posts)
+
+
 def query_post_permalink(post_id, update=False):
-    cache_key = "post" + str(post_id)
+    cache_key = "post_" + str(post_id)
     db_query = "SELECT * FROM blog WHERE id = ?"
     db_query_parameters = [int(post_id)]
     posts = cached_blog_query(cache_key, db_query, db_query_parameters, update)
@@ -53,17 +65,25 @@ def posts_with_age(posts):
     return post_list, query_age
 
 
-def write_blog_page(post_list, query_age, front_page=False):
+def write_blog_page(post_list, query_age, prev_page_no=None, next_page_no=None,
+                    front_page=False):
     for item in post_list:
         escaped_content = ""
         for line in item.get("content").splitlines():
             escaped_content += Markup.escape(line) + Markup("<br>")
         item["content"] = escaped_content
+        if item.get("id") == 1:
+            next_page_no = None
     if not post_list and not front_page:
         return abort(404)
     else:
-        return render_template("blog_page.html", post_list=post_list,
-                               query_age=query_age)
+        blog_page_params = dict(
+            post_list=post_list,
+            query_age=query_age,
+            prev_page_no=prev_page_no,
+            next_page_no=next_page_no,
+        )
+        return render_template("blog_page.html", **blog_page_params)
 
 
 @blog.route("/flush")
@@ -75,13 +95,26 @@ def flush_cache():
 @blog.route("/")
 def blog_frontpage():
     post_list, query_age = query_blog_frontpage()
-    return write_blog_page(post_list, query_age, front_page=True)
+    return write_blog_page(post_list, query_age, next_page_no="2",
+                           front_page=True)
 
 
 @blog.route("/<int:post_id>")
 def post_permalink(post_id):
     post_list, query_age = query_post_permalink(post_id)
     return write_blog_page(post_list, query_age)
+
+
+@blog.route("/page/<int:page_no>")
+def blog_page(page_no):
+    if page_no == 1:
+        return redirect(url_for("blog.blog_frontpage"))
+    next_page_no = str(page_no + 1)
+    prev_page_no = str(page_no - 1)
+    if int(prev_page_no) < 1:
+        prev_page_no = None
+    post_list, query_age = query_blog_page(page_no)
+    return write_blog_page(post_list, query_age, prev_page_no, next_page_no)
 
 
 @blog.route("/.json")
@@ -112,6 +145,7 @@ def blog_newpost():
             post_id = last_post_id()
             query_blog_frontpage(update=True)
             query_post_permalink(post_id, update=True)
+            # TODO update/invalidate CACHE for all /page/<int:page_no>
             return redirect(url_for("blog.post_permalink", post_id=post_id))
         else:
             errormsg = "We need both Subject and Content"
