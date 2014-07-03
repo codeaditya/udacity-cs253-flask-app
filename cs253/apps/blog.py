@@ -96,7 +96,7 @@ def blog_frontpage():
                            front_page=True)
 
 
-@blog.route("/<int:post_id>")
+@blog.route("/post/<int:post_id>")
 def post_permalink(post_id):
     post_list, query_age = query_post_permalink(post_id)
     return write_blog_page(post_list, query_age)
@@ -120,7 +120,7 @@ def jsonify_blog_frontpage():
     return jsonify(posts=post_list, query_age=query_age)
 
 
-@blog.route("/<int:post_id>.json")
+@blog.route("/post/<int:post_id>.json")
 def jsonify_post_permalink(post_id):
     post_list, query_age = query_post_permalink(post_id)
     return jsonify(posts=post_list, query_age=query_age)
