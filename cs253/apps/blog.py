@@ -22,8 +22,7 @@ def query_blog_frontpage(update=False):
     cache_key = "blog_frontpage"
     db_query = "SELECT * FROM blog ORDER BY id DESC LIMIT 10"
     db_query_parameters = []
-    posts = cached_blog_query(cache_key, db_query, db_query_parameters, update)
-    return posts_with_age(posts)
+    return cached_blog_query(cache_key, db_query, db_query_parameters, update)
 
 
 def query_blog_page(page_no, update=False):
@@ -34,16 +33,14 @@ def query_blog_page(page_no, update=False):
     first_post = last_post - entry_per_page + 1
     db_query = "SELECT * FROM blog WHERE id <= ? AND id >= ? ORDER BY id DESC"
     db_query_parameters = [last_post, first_post]
-    posts = cached_blog_query(cache_key, db_query, db_query_parameters, update)
-    return posts_with_age(posts)
+    return cached_blog_query(cache_key, db_query, db_query_parameters, update)
 
 
 def query_post_permalink(post_id, update=False):
     cache_key = "post_" + str(post_id)
     db_query = "SELECT * FROM blog WHERE id = ?"
     db_query_parameters = [int(post_id)]
-    posts = cached_blog_query(cache_key, db_query, db_query_parameters, update)
-    return posts_with_age(posts)
+    return cached_blog_query(cache_key, db_query, db_query_parameters, update)
 
 
 def cached_blog_query(cache_key, db_query, db_query_parameters, update):
@@ -56,7 +53,7 @@ def cached_blog_query(cache_key, db_query, db_query_parameters, update):
         update_time = time.time()
         posts = (post_list, update_time)
         CACHE.set(cache_key, posts)
-    return posts
+    return posts_with_age(posts)
 
 
 def posts_with_age(posts):
