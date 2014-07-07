@@ -3,7 +3,7 @@
 
 from flask import Blueprint, redirect, render_template, request, url_for
 
-birthday = Blueprint("birthday", __name__)
+birthday = Blueprint("birthday", __name__, template_folder="templates")
 
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct",
           "Nov", "Dec", "January", "February", "March", "April", "May", "June",
