@@ -3,7 +3,7 @@
 
 from flask import Blueprint, render_template, request
 
-rot13 = Blueprint("rot13", __name__)
+rot13 = Blueprint("rot13", __name__, template_folder="templates")
 
 
 def rot13_converted(text):
