@@ -58,7 +58,7 @@ from apps.index import index
 from apps.birthday.birthday import birthday
 from apps.rot13.rot13 import rot13
 from apps.ascii_chan.ascii_chan import ascii_chan
-from apps.user_auth import user_auth
+from apps.user_auth.user_auth import user_auth
 from apps.blog import blog
 
 app.register_blueprint(index, url_prefix="/")

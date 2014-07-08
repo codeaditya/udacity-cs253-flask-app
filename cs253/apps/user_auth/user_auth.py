@@ -9,7 +9,7 @@ from flask import (Blueprint, g, make_response, redirect, render_template,
 
 import cs253.lib.utils as utils
 
-user_auth = Blueprint("user_auth", __name__)
+user_auth = Blueprint("user_auth", __name__, template_folder="templates")
 
 USERNAME_REGEX = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
 PASSWORD_REGEX = re.compile(r"^.{3,20}$")
