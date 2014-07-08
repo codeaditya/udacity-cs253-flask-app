@@ -11,7 +11,7 @@ from flask import Blueprint, g, redirect, render_template, request, url_for
 from cs253 import CACHE, get_ip_address
 from cs253.config import IPINFODB_API_KEY1
 
-ascii_chan = Blueprint("ascii_chan", __name__)
+ascii_chan = Blueprint("ascii_chan", __name__, template_folder="templates")
 
 IPINFODB_URL = "http://api.ipinfodb.com/v3/ip-city/?key={0}&format=json&ip=" \
                "".format(IPINFODB_API_KEY1)
