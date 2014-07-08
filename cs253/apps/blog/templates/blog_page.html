@@ -6,12 +6,12 @@
 
 {% block body %}
     <div class="blog-header">
-        <h1 class="blog-title text-center"><a href="/cs253/blog">CS253 Blog</a></h1>
+        <h1 class="blog-title text-center"><a href="{{ url_for('blog.blog_frontpage') }}">CS253 Blog</a></h1>
     </div>
     {% for post in post_list %}
         <div class="blog-post">
             <div class="blog-post-title">
-                <a href="/cs253/blog/post/{{ post.id }}">{{ post.subject }}</a>
+                <a href="{{ url_for('blog.post_permalink', post_id=post.id) }}">{{ post.subject }}</a>
             </div>
             <div class="blog-post-meta">Posted on: {{ post.created }}</div>
             <div>
@@ -21,10 +21,10 @@
     {% endfor %}
     <ul class="pager">
         {% if prev_page_no %}
-            <li><a href="/cs253/blog/page/{{ prev_page_no }}">Previous</a></li>
+            <li><a href="{{ url_for('blog.blog_page', page_no=prev_page_no) }}">Previous</a></li>
         {% endif %}
         {% if next_page_no %}
-            <li><a href="/cs253/blog/page/{{ next_page_no }}">Next</a></li>
+            <li><a href="{{ url_for('blog.blog_page', page_no=next_page_no) }}">Next</a></li>
         {% endif %}
     </ul>
 {% endblock body %}
