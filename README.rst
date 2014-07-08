@@ -76,9 +76,9 @@ Unittests
 Right now, the tests doesn't cover the whole of the application. Only the
 following are covered:
 
-- ``cs253/apps/birthday.py``
-- ``cs253/apps/rot13.py``
-- ``cs253/lib/utils.py``
+- ``cs253/apps/birthday``
+- ``cs253/apps/rot13``
+- ``cs253/lib``
 
 We can run the unittests executing the following command from the root of the
 folder (``udacity-cs253-flask-app``):
