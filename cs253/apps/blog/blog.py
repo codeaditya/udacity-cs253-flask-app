@@ -9,7 +9,7 @@ from flask import (Blueprint, Markup, abort, g, jsonify, redirect, request,
 
 from cs253 import CACHE
 
-blog = Blueprint("blog", __name__)
+blog = Blueprint("blog", __name__, template_folder="templates")
 
 
 def last_post_id():
