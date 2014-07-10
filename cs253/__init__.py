@@ -5,10 +5,6 @@ import contextlib
 import sqlite3
 
 from flask import Flask, g, request
-from werkzeug.contrib.cache import SimpleCache
-
-# use basic caching provided by Werkzeug Library
-CACHE = SimpleCache(default_timeout=864000)
 
 # create our application
 app = Flask(__name__)

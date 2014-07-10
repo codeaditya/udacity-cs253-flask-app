@@ -7,7 +7,7 @@ import time
 from flask import (Blueprint, Markup, abort, g, jsonify, redirect, request,
                    render_template, url_for)
 
-from cs253 import CACHE
+from cs253.cache import CACHE
 
 blog = Blueprint("blog", __name__, template_folder="templates")
 
