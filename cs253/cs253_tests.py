@@ -5,6 +5,8 @@ import os
 import tempfile
 import unittest
 
+from flask import url_for
+
 import cs253
 import cs253.lib.utils as utils
 
@@ -92,21 +94,24 @@ class CS253TestCase(unittest.TestCase):
         self.db_fd, cs253.app.config["DATABASE"] = tempfile.mkstemp()
         cs253.app.config["TESTING"] = True
         self.app = cs253.app.test_client()
+        self.ctx = cs253.app.test_request_context()
+        self.ctx.push()
         cs253.init_db()
 
     def tearDown(self):
         os.close(self.db_fd)
         os.unlink(cs253.app.config["DATABASE"])
+        self.ctx.pop()
 
 
 class BirthdayTestCase(CS253TestCase):
     def birthday_response(self, day, month, year):
-        return self.app.post("/cs253/birthday-form", data=dict(
+        return self.app.post(url_for("birthday.birthday_form"), data=dict(
             day=day, month=month, year=year
         ), follow_redirects=True)
 
     def test_birthday_form_get_page_loading(self):
-        rv = self.app.get("/cs253/birthday-form")
+        rv = self.app.get(url_for("birthday.birthday_form"))
         self.assertEqual(rv.status_code, 200)
         self.assertIn("What's your birthday?", rv.data)
 
@@ -140,12 +145,12 @@ class BirthdayTestCase(CS253TestCase):
 
 class Rot13TestCase(CS253TestCase):
     def rot13_response(self, text):
-        return self.app.post("/cs253/rot13", data=dict(
+        return self.app.post(url_for("rot13.rot13_form"), data=dict(
             text=text
         ), follow_redirects=True)
 
     def test_rot13_get_page_loading(self):
-        rv = self.app.get("/cs253/rot13")
+        rv = self.app.get(url_for("rot13.rot13_form"))
         self.assertEqual(rv.status_code, 200)
         self.assertIn("Enter some text to ROT13", rv.data)
 
