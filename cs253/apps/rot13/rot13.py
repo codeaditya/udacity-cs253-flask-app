@@ -38,7 +38,7 @@ def rot_character(unicode_codepoint, minimum, maximum):
     return chr(unicode_codepoint)
 
 
-@rot13.route("/rot13", methods=["GET", "POST"])
+@rot13.route("/", methods=["GET", "POST"])
 def rot13_form():
     rot13_text = ""
     if request.method == "POST":

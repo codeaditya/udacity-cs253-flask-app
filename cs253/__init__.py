@@ -62,8 +62,8 @@ from apps.user_auth.user_auth import user_auth
 from apps.blog.blog import blog
 
 app.register_blueprint(index, url_prefix="/")
-app.register_blueprint(birthday, url_prefix="/cs253")
-app.register_blueprint(rot13, url_prefix="/cs253")
+app.register_blueprint(birthday, url_prefix="/cs253/birthday")
+app.register_blueprint(rot13, url_prefix="/cs253/rot13")
 app.register_blueprint(ascii_chan, url_prefix="/cs253/ascii-chan")
 app.register_blueprint(user_auth, url_prefix="/cs253/blog")
 app.register_blueprint(blog, url_prefix="/cs253/blog")
