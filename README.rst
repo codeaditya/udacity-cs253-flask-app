@@ -52,8 +52,9 @@ The package ``cs253`` contains the following folders:
 And the following files:
 
 - ``cs253/__init__.py``: This is our main file which instantiates our Flask app
-  and Cache (``SimpleCache`` from Werkzeug library) and imports all the
-  Blueprints (mini-apps) from ``cs253/apps``
+  and imports all the Blueprints (mini-apps) from ``cs253/apps``
+- ``cs253/cache.py``: This instantiates ``CACHE`` (``SimpleCache`` from
+  Werkzeug library) which is used by Blueprints for Caching purposes
 - ``cs253/config.py``: This is imported inside ``cs253/__init__.py``
 - ``cs253/cs253_tests.py``: This is for unittests for our application
 
