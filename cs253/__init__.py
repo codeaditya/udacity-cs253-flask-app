@@ -4,7 +4,7 @@
 import contextlib
 import sqlite3
 
-from flask import Flask, g, request
+from flask import Flask, g
 
 # create our application
 app = Flask(__name__)
@@ -40,14 +40,6 @@ def teardown_request(exception):
     db = getattr(g, "db", None)
     if db is not None:
         db.close()
-
-
-def get_ip_address():
-    if app.config.get("PYTHONANYWHERE"):
-        ip_address = request.headers.get("X-Forwarded-For")
-    else:
-        ip_address = request.remote_addr
-    return str(ip_address)
 
 
 from apps.index import index
