@@ -1,13 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import os
-import tempfile
 import unittest
 
-from flask import url_for
-
-import cs253
 import cs253.lib.utils as utils
 
 
@@ -87,90 +82,3 @@ class UtilsCookieTestCase(unittest.TestCase):
     def test_check_secure_cookie_returns_cookie_value_for_unmodified_hash(self):
         hashed_string = utils.make_secure_cookie("cookie")
         self.assertEqual("cookie", utils.check_secure_cookie(hashed_string))
-
-
-class CS253TestCase(unittest.TestCase):
-    def setUp(self):
-        self.db_fd, cs253.app.config["DATABASE"] = tempfile.mkstemp()
-        cs253.app.config["TESTING"] = True
-        self.app = cs253.app.test_client()
-        self.ctx = cs253.app.test_request_context()
-        self.ctx.push()
-        cs253.init_db()
-
-    def tearDown(self):
-        os.close(self.db_fd)
-        os.unlink(cs253.app.config["DATABASE"])
-        self.ctx.pop()
-
-
-class BirthdayTestCase(CS253TestCase):
-    def birthday_response(self, day, month, year):
-        return self.app.post(url_for("birthday.birthday_form"), data=dict(
-            day=day, month=month, year=year
-        ), follow_redirects=True)
-
-    def test_birthday_form_get_page_loading(self):
-        rv = self.app.get(url_for("birthday.birthday_form"))
-        self.assertEqual(rv.status_code, 200)
-        self.assertIn("What's your birthday?", rv.data)
-
-    def test_birthday_form_post_valid_inputs(self):
-        correct_birthday_msg = "Thanks! That&#39;s a totally valid day."
-        rv = self.birthday_response("9", "July", "1991")
-        self.assertEqual(rv.status_code, 200)
-        self.assertIn(correct_birthday_msg, rv.data)
-        rv = self.birthday_response("24", "Jan", "1921")
-        self.assertEqual(rv.status_code, 200)
-        self.assertIn(correct_birthday_msg, rv.data)
-        rv = self.birthday_response("31", "Dec", "1991")
-        self.assertEqual(rv.status_code, 200)
-        self.assertIn(correct_birthday_msg, rv.data)
-
-    def test_birthday_form_post_invalid_inputs(self):
-        incorrect_birthday_msg = "That doesn&#39;t look like a valid date to me."
-        rv = self.birthday_response("0", "May", "2000")
-        self.assertEqual(rv.status_code, 200)
-        self.assertIn(incorrect_birthday_msg, rv.data)
-        rv = self.birthday_response("31", "Sept", "2010")
-        self.assertEqual(rv.status_code, 200)
-        self.assertIn(incorrect_birthday_msg, rv.data)
-        rv = self.birthday_response("5", "February", "2023")
-        self.assertEqual(rv.status_code, 200)
-        self.assertIn(incorrect_birthday_msg, rv.data)
-        rv = self.birthday_response("17", "December", "1840")
-        self.assertEqual(rv.status_code, 200)
-        self.assertIn(incorrect_birthday_msg, rv.data)
-
-
-class Rot13TestCase(CS253TestCase):
-    def rot13_response(self, text):
-        return self.app.post(url_for("rot13.rot13_form"), data=dict(
-            text=text
-        ), follow_redirects=True)
-
-    def test_rot13_get_page_loading(self):
-        rv = self.app.get(url_for("rot13.rot13_form"))
-        self.assertEqual(rv.status_code, 200)
-        self.assertIn("Enter some text to ROT13", rv.data)
-
-    def test_rot13_post_escaped_character_inputs(self):
-        rv = self.rot13_response("That's it, this has been rot13 converted.")
-        self.assertEqual(rv.status_code, 200)
-        self.assertIn("Gung&#39;f vg, guvf unf orra ebg13 pbairegrq.", rv.data)
-
-    def test_rot13_post_converted_escaped_inputs(self):
-        rv = self.rot13_response("Gung&#39;f vg, guvf unf orra ebg13 pbairegrq.")
-        self.assertEqual(rv.status_code, 200)
-        self.assertIn("That&amp;#39;s it, this has been rot13 converted.",
-                      rv.data)
-
-    def test_rot13_post_escaped_html_inputs(self):
-        rv = self.rot13_response("Testing </html> tags </textarea>. Hopeful.")
-        self.assertEqual(rv.status_code, 200)
-        self.assertIn("Grfgvat &lt;/ugzy&gt; gntf &lt;/grkgnern&gt;. Ubcrshy.",
-                      rv.data)
-
-
-if __name__ == "__main__":
-    unittest.main()

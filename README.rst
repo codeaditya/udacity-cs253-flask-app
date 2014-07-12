@@ -84,4 +84,7 @@ following are covered:
 We can run the unittests executing the following command from the root of the
 folder (``udacity-cs253-flask-app``):
 
-    python -m cs253/cs253_tests
+    python -m unittest discover
+
+This would discover all the unittests available and run tests through them.
+All the tests are available in the ``testsuite`` package.
