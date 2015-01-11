@@ -23,10 +23,12 @@ def get_ip_address():
         ip_address = request.headers.get("X-Forwarded-For")
     else:
         ip_address = request.remote_addr
-    return str(ip_address)
+    return ip_address
 
 
 def get_coords(ip):
+    if not ip:
+        return
     url = IPINFODB_URL + str(ip)
     try:
         content = json.load(urllib2.urlopen(url))
