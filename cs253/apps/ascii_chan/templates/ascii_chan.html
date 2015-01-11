@@ -38,10 +38,14 @@
         </div>
     <hr>
     <h2 class="text-center">recently submitted /ascii/ arts</h2>
-    {% for item in art_list %}
-        <div class="blog-post">
-            <div class="blog-post-title">{{ item.title }}</div>
-            <pre>{{ item.art }}</pre>
-        </div>
-    {% endfor %}
+    {% if not art_list %}
+        <p>There isn't any art to show. Why not submit one?</p>
+    {% else %}
+        {% for item in art_list %}
+            <div class="blog-post">
+                <div class="blog-post-title">{{ item.title }}</div>
+                <pre>{{ item.art }}</pre>
+            </div>
+        {% endfor %}
+    {% endif %}
 {% endblock body %}
