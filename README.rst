@@ -47,7 +47,8 @@ The package ``cs253`` contains the following folders:
 - ``cs253/schema``: Database schema definition files for sqlite3
 - ``cs253/static``: All the css, fonts, javascript files go here (I am using
   Bootstrap)
-- ``cs253/templates``: Templates for all our mini-apps we develop go here
+- ``cs253/templates``: Base templates for the whole application goes here. All
+  our mini-apps have there own ``templates`` folder inside their own package.
 
 And the following files:
 
@@ -55,8 +56,9 @@ And the following files:
   and imports all the Blueprints (mini-apps) from ``cs253/apps``
 - ``cs253/cache.py``: This instantiates ``CACHE`` (``SimpleCache`` from
   Werkzeug library) which is used by Blueprints for Caching purposes
-- ``cs253/config.py``: This is imported inside ``cs253/__init__.py``
-- ``cs253/cs253_tests.py``: This is for unittests for our application
+- ``cs253/config.py``: This is imported inside ``cs253/__init__.py``. The file
+  isn't committed to the repository, you need to create it following the
+  Configuration_ section.
 
 
 Configuration
@@ -74,12 +76,10 @@ config defined:
 
 Unittests
 ---------
-Right now, the tests doesn't cover the whole of the application. Only the
-following are covered:
-
-- ``cs253/apps/birthday``
-- ``cs253/apps/rot13``
-- ``cs253/lib``
+The root of the folder contains the ``testsuite`` package for all the tests we
+write for the whole application as well as our mini-apps. The tests follow the
+same structure as the ``cs253`` package. Right now, the tests doesn't cover the
+whole of the application.
 
 We can run the unittests executing the following command from the root of the
 folder (``udacity-cs253-flask-app``):
@@ -87,4 +87,3 @@ folder (``udacity-cs253-flask-app``):
     python -m unittest discover
 
 This would discover all the unittests available and run tests through them.
-All the tests are available in the ``testsuite`` package.
