@@ -43,6 +43,7 @@ def get_coords(ip):
 
 def gmaps_img_for(points):
     url = GMAPS_URL
+    points = set(points)
     for point in points:
         url += "&markers={0}".format(point)
     return url
