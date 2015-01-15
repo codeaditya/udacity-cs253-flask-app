@@ -13,9 +13,9 @@ from cs253.config import IPINFODB_API_KEY1, PYTHONANYWHERE
 
 ascii_chan = Blueprint("ascii_chan", __name__, template_folder="templates")
 
-IPINFODB_URL = "http://api.ipinfodb.com/v3/ip-city/?key={0}&format=json&ip=" \
+IPINFODB_URL = "https://api.ipinfodb.com/v3/ip-city/?key={0}&format=json&ip=" \
                "".format(IPINFODB_API_KEY1)
-GMAPS_URL = "http://maps.googleapis.com/maps/api/staticmap?size=450x400&sensor=false"
+GMAPS_URL = "https://maps.googleapis.com/maps/api/staticmap?size=450x400&sensor=false"
 
 
 def get_ip_address():
