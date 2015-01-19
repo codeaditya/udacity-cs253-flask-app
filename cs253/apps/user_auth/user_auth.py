@@ -59,7 +59,8 @@ def query_user_by_id(user_id):
     return cur.fetchone()
 
 
-def add_user_to_db(username, secure_password, email=None):
+def add_user_to_db(username, pw, email=None):
+    secure_password = utils.make_pw_hash(username, pw)
     current_time = datetime.datetime.utcnow()
     db_query = ("INSERT INTO users (username, password, creation_date, email) "
                 "VALUES (?, ?, ?, ?)")
@@ -89,8 +90,7 @@ def user_signup():
         if not error_in_form:
             user_exists = query_user_by_name(username)
             if not user_exists:
-                secure_password = utils.make_pw_hash(username, password)
-                add_user_to_db(username, secure_password, email)
+                add_user_to_db(username, password, email)
                 user = query_user_by_name(username)
                 return successful_login_response(user)
             else:
